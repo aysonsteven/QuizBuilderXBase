@@ -33,7 +33,7 @@ export class QuestionslistPage {
   getQuestionList(){
     this.http.get( this.url + '?mc=post.search' ).subscribe(res=>{
       this.questions = JSON.parse(res['_body']).data.rows
-      console.log( this.questions )
+      console.log( res )
     }, e=>{})
   }
 

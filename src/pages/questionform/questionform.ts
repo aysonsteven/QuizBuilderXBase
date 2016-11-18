@@ -82,11 +82,11 @@ export class QuestionformPage {
       
       this.http.get( this.url + '?mc=post.get&idx=' + this.idx ).subscribe(res=>{
         this.question.question = JSON.parse(res['_body']).data.title;
-        this.question.choice1 = JSON.parse(res['_body']).data.extra_3;
-        this.question.choice2 = JSON.parse(res['_body']).data.extra_4;
-        this.question.choice3 = JSON.parse(res['_body']).data.extra_5;
-        this.question.choice4 = JSON.parse(res['_body']).data.extra_6;
-        this.question.answer = JSON.parse(res['_body']).data.extra_1;
+        this.question.choice1 = JSON.parse(res['_body']).data.extra_2;
+        this.question.choice2 = JSON.parse(res['_body']).data.extra_3;
+        this.question.choice3 = JSON.parse(res['_body']).data.extra_4;
+        this.question.choice4 = JSON.parse(res['_body']).data.extra_5;
+        this.question.answer = JSON.parse(res['_body']).data.extra_6;
       }, e=>{})
     }
   }
