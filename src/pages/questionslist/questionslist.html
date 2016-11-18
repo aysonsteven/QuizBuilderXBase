@@ -1,0 +1,59 @@
+<!--
+  Generated template for the Questionslist page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>questionslist</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+
+  <ion-list>
+    <ion-item-sliding  *ngFor="let question of questions; let i = index" (ionDrag)="onSlideItem(i)">
+      <ion-item>
+       {{ question.title }}
+        <button icon-only (click)="more[i] = ! more[i]">
+          <ion-icon name="arrow-down"  *ngIf="!more[i]" small></ion-icon>
+          <ion-icon name="arrow-up"  *ngIf="more[i]" small></ion-icon>
+        </button>
+        <div *ngIf="more[i]">
+          <ion-card>
+            <div (click)="onClickChoice(ansTest=1,id.answer)">
+              Choice1: {{ question.extra_2 }} 
+            </div>
+            <div (click)="onClickChoice(ansTest=2,id.answer)">
+              Choice2: {{ question.extra_3 }}
+            </div>
+            <div (click)="onClickChoice(ansTest=3,id.answer)">
+              Choice3: {{ question.extra_4 }}
+            </div>
+            <div (click)="onClickChoice(ansTest=4,id.answer)">
+              Choice4: {{ question.extra_5 }}
+            </div>
+            <div>
+              Answer: {{ question.extra_6 }}
+            </div>
+          </ion-card>
+
+
+        </div>
+      </ion-item>
+      <ion-item-options >
+        <button ion-button color="secondary" (click)="onClickUpdate(question.idx, i)"> Edit</button>
+        <button ion-button color="danger" (click)="onClickDelete(question.idx, i)">Delete</button>
+      </ion-item-options>
+     
+    </ion-item-sliding>
+  </ion-list>
+
+  <button ion-button (click)="onClickBack()">Back</button>
+
+</ion-content>
