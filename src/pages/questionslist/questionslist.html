@@ -17,26 +17,30 @@
   
 
   <ion-list>
-    <ion-item-sliding  *ngFor="let question of questions; let i = index" (ionDrag)="onSlideItem(i)">
+    <ion-item  *ngFor="let question of questions; let i = index" >
       
       <ion-item  *ngIf="! more[i]">
         {{ question.title }}
         <br/>
         <button  (click)='more[i] = ! more[i]'>Show more</button>
+        <button (click)="onClickUpdate(question.idx, i)"> Edit</button>
+        <button (click)="onClickDelete(question.idx, i)">Delete</button>
       </ion-item>
         
       <ion-item text-wrap *ngIf="more[i]">   
         {{ question.title }}
         <br/>
         <button (click)='more[i] = ! more[i]'>Show less</button>
+        <button (click)="onClickUpdate(question.idx, i)"> Edit</button>
+        <button (click)="onClickDelete(question.idx, i)">Delete</button>
       </ion-item>
       
-      <ion-item-options >
+      <!--<ion-item-options >
         <button ion-button color="secondary" (click)="onClickUpdate(question.idx, i)"> Edit</button>
         <button ion-button color="danger" (click)="onClickDelete(question.idx, i)">Delete</button>
-      </ion-item-options>
+      </ion-item-options>-->
      
-    </ion-item-sliding>
+    </ion-item>
   </ion-list>
 
   <button ion-button (click)="onClickBack()">Back</button>
