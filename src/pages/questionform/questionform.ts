@@ -34,7 +34,7 @@ export class QuestionformPage {
   option:string;
   
 
-  url:string = 'http://work.org/xbase/'
+  url:string = 'http://xbase.esy.es/'
   question = questionData;
   constructor(
     private navCtrl: NavController,
@@ -108,7 +108,7 @@ export class QuestionformPage {
     }
   }
 
-  onClickCreateQuestion(){
+  grammarQuestion(){
     if ( this.validateForm() == false ) {
       return;
     }
@@ -139,6 +139,24 @@ export class QuestionformPage {
     },e=>{
       console.log( 'error' + e )
     })
+  }
+
+  vocaQuestion(){
+    console.log(' voca ' + this.question.category);
+  }
+
+  photoQuestion(){
+    console.log('pic ' + this.question.category )
+  }
+
+  onClickCreateQuestion(){
+    if( this.question.category == 'grammar'){
+      this.grammarQuestion();
+    }else if( this.question.category == 'vocabulary' ){
+      this.vocaQuestion();
+    }else{
+      this.photoQuestion();
+    }
   }
 
 }

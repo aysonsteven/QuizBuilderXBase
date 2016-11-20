@@ -17,9 +17,11 @@ import { Http } from '@angular/http';
 
 export class QuestionslistPage {
 
+  
+
   more = [];
 
-  url:string = 'http://work.org/xbase/';
+  url:string = 'http://xbase.esy.es/';
   questions = [];
   constructor(private navCtrl: NavController, private http: Http, private tstCtrl: ToastController) {
 
@@ -33,8 +35,12 @@ export class QuestionslistPage {
   getQuestionList(){
     this.http.get( this.url + '?mc=post.search' ).subscribe(res=>{
       this.questions = JSON.parse(res['_body']).data.rows
-      console.log( res )
+      console.log( JSON.parse(res['_body']).data )
     }, e=>{})
+  }
+
+  moretest(x){
+    console.log(x);
   }
 
   onSlideItem(id){
