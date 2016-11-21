@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import * as config from '../shared/shared.config.ts';
 import { Http } from '@angular/http'
 /*
   Generated class for the Questionform page.
@@ -9,6 +8,24 @@ import { Http } from '@angular/http'
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
+let grammarData = {
+  question: '',
+  choice1: '',
+  choice2: '',
+  choice3: '',
+  choice4: '',
+  answer: ''
+}
+
+let vocabulary = {
+    word: '',
+    choice1: '',
+    choice2: '',
+    choice3: '',
+    choice4: '',
+    answer: ''
+}
 @Component({
   selector: 'page-questionform',
   templateUrl: 'questionform.html'
@@ -25,9 +42,9 @@ export class QuestionformPage {
   option:string;
   
 
-  url:string = config.serverURL;
-  grammarPost = config.grammar;
-  vocabularyPost = config.vocabulary;
+  url:string = 'http://xbase.esy.es/';
+  grammarPost = grammarData;
+  vocabularyPost = vocabulary;
   category: string = 'grammar';
   constructor(
     private navCtrl: NavController,
@@ -196,7 +213,7 @@ export class QuestionformPage {
   }
 
   photoQuestion(){
-    console.log('pic ' + this.grammarPost.category )
+    // console.log('pic ' + this.grammarPost )
   }
 
   onClickCreateQuestion(){

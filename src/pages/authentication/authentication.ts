@@ -36,7 +36,7 @@ export class AuthenticationPage {
   authentication: string = 'login';
   errorChk;
   users= [];
-  url:string = config.serverURL;
+  url:string = 'http://xbase.esy.es/';
 
   constructor(private navCtrl: NavController, private http: Http) {
     this.test();

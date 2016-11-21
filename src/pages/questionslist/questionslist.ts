@@ -22,7 +22,7 @@ export class QuestionslistPage {
 
   more = [];
 
-  url:string = config.serverURL;;
+  url:string = 'http://xbase.esy.es/';
   questions = [];
   constructor(private navCtrl: NavController, private http: Http, private tstCtrl: ToastController) {
     console.log('checkConfig:: ' + config.serverURL)
