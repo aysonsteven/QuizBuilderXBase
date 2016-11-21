@@ -1,17 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import * as config from '../shared/shared.config.ts';
 import { Http } from '@angular/http'
-let questionData = {
-  category: 'grammar',
-  question: '',
-  choice1: '',
-  choice2: '',
-  choice3: '',
-  choice4: '',
-  answer: ''
-
-}
 /*
   Generated class for the Questionform page.
 
@@ -34,8 +25,10 @@ export class QuestionformPage {
   option:string;
   
 
-  url:string = 'http://xbase.esy.es/'
-  question = questionData;
+  url:string = config.serverURL;
+  grammarPost = config.grammar;
+  vocabularyPost = config.vocabulary;
+  category: string = 'grammar';
   constructor(
     private navCtrl: NavController,
     private http: Http,
@@ -58,6 +51,11 @@ export class QuestionformPage {
 
   }
 
+  removeWhiteSpaces( val ){
+    console.log('test:: ' , val)
+    return val.split(' ').join('')
+  }
+
   createPostConfig(){
     this.http.request( this.url + '?mc=post_config.create&id=' + this.postConf.id + '&name=' + this.postConf.name ).subscribe( s=>{
       console.log( 'this :::: ()' + s )
@@ -70,43 +68,99 @@ export class QuestionformPage {
 
 
   onClickReset(){
-    this.question.question = '';
-    this.question.choice1 = '';
-    this.question.choice2 = '';
-    this.question.choice3 = '';
-    this.question.choice4 = '';
+    this.grammarPost.question = '';
+    this.grammarPost.choice1 = '';
+    this.grammarPost.choice2 = '';
+    this.grammarPost.choice3 = '';
+    this.grammarPost.choice4 = '';
   }
 
   getQuestion(){
-    if( this.idx){
+    if( this.idx ){
       
       this.http.get( this.url + '?mc=post.get&idx=' + this.idx ).subscribe(res=>{
-        this.question.question = JSON.parse(res['_body']).data.title;
-        this.question.choice1 = JSON.parse(res['_body']).data.extra_2;
-        this.question.choice2 = JSON.parse(res['_body']).data.extra_3;
-        this.question.choice3 = JSON.parse(res['_body']).data.extra_4;
-        this.question.choice4 = JSON.parse(res['_body']).data.extra_5;
-        this.question.answer = JSON.parse(res['_body']).data.extra_6;
-      }, e=>{})
+
+        if( JSON.parse(res['_body']).data.extra_1 == 'grammar' ){
+
+          this.grammarPost.question = JSON.parse(res['_body']).data.title;
+          this.grammarPost.choice1 = JSON.parse(res['_body']).data.extra_2;
+          this.grammarPost.choice2 = JSON.parse(res['_body']).data.extra_3;
+          this.grammarPost.choice3 = JSON.parse(res['_body']).data.extra_4;
+          this.grammarPost.choice4 = JSON.parse(res['_body']).data.extra_5;
+          this.grammarPost.answer = JSON.parse(res['_body']).data.extra_6;
+          return;
+        }else if ( JSON.parse(res['_body']).data.extra_1 == 'vocabulary' ){
+          this.category = 'vocabulary';
+          console.log('category:: ', this.category )
+          return;
+          }
+          this.category = 'picture';
+          console.log( 'category:: ', this.category );
+        console.log('check getEditData: ' , JSON.parse(res['_body']).data)
+      }, e=>{ console.log('error ' , e )})
     }
   }
 
   
 
   validateForm(){
-    if( this.question.question == ''){
-      this.errorChk = { error: 'error' }
-      return false;
+    if( this.category == 'grammar'){
+      if( this.grammarPost.question == ''){
+        this.errorChk = { error: 'error' }
+        return false;
+      }
+    }else if( this.category == 'vocabulary'){
+      if( this.vocabularyPost.word == ''){
+        this.errorChk = { error: 'error' }
+        return false;
+      }
     }
+
   }
 
   checkIDX(){
     if( ! this.idx ){
       this.option = '?mc=post.write&post_id=questions' ;
+      return;
     }else{
       this.option = '?mc=post.edit&idx='+ this.idx +'&post_id=questions';
     }
   }
+
+  vocabularyQuestion(){
+    
+    if ( this.validateForm() == false ) {
+      return;
+    }
+    this.checkIDX();
+    this.errorChk = { progress: 'progress'};
+    this.http.request(
+      this.url
+      + this.option
+      + '&extra_1='
+      + this.category
+      + '&title='
+      + this.vocabularyPost.word
+      + '&extra_2='
+      + this.vocabularyPost.choice1
+      + '&extra_3='
+      + this.vocabularyPost.choice2
+      + '&extra_4='
+      + this.vocabularyPost.choice3
+      + '&extra_5='
+      + this.vocabularyPost.choice4
+      + '&extra_6='
+      + this.vocabularyPost.answer
+      )
+      .subscribe( res=>{
+      this.errorChk = { success: 'success' }
+      console.log( 'successfully added: ' + res );
+      if( !this.idx ) this.onClickReset();
+    },e=>{
+      console.log( 'error' + e )
+    })
+  }
+  
 
   grammarQuestion(){
     if ( this.validateForm() == false ) {
@@ -118,19 +172,19 @@ export class QuestionformPage {
       this.url 
         + this.option
         + '&extra_1='
-        + this.question.category
+        + this.category
         + '&title=' 
-        + this.question.question 
+        + this.grammarPost.question 
         + '&extra_2=' 
-        + this.question.choice1 
+        + this.grammarPost.choice1 
         + '&extra_3=' 
-        + this.question.choice2 
+        + this.grammarPost.choice2 
         + '&extra_4=' 
-        + this.question.choice3
+        + this.grammarPost.choice3
         + '&extra_5='
-        + this.question.choice4
+        + this.grammarPost.choice4
         + '&extra_6='
-        + this.question.answer  
+        + this.grammarPost.answer  
       )
       .subscribe( res=>{
       this.errorChk = { success: 'success' }
@@ -141,19 +195,15 @@ export class QuestionformPage {
     })
   }
 
-  vocaQuestion(){
-    console.log(' voca ' + this.question.category);
-  }
-
   photoQuestion(){
-    console.log('pic ' + this.question.category )
+    console.log('pic ' + this.grammarPost.category )
   }
 
   onClickCreateQuestion(){
-    if( this.question.category == 'grammar'){
+    if( this.category == 'grammar'){
       this.grammarQuestion();
-    }else if( this.question.category == 'vocabulary' ){
-      this.vocaQuestion();
+    }else if( this.category == 'vocabulary' ){
+      this.vocabularyQuestion();
     }else{
       this.photoQuestion();
     }

@@ -15,53 +15,53 @@
 
 <ion-content padding>
   
-  <ion-list>
+  <ion-list *ngIf="! idx">
     <ion-item>
       <ion-label>Category</ion-label>
-      <ion-select [(ngModel)]="question.category">
-        <ion-option value="grammar">English Grammar</ion-option>
+      <ion-select [(ngModel)]="category">
+        <ion-option value="grammar">Grammar</ion-option>
         <ion-option value="vocabulary">Vocabulary</ion-option>
         <ion-option value="picture">Picture Description</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
-<div [ngSwitch]="question.category">
+<div [ngSwitch]="category">
   <div *ngSwitchCase="'grammar'">
 
       <ion-list>
       <ion-item>
         <ion-label stacked>Question</ion-label>
-        <ion-textarea [(ngModel)]="question.question"></ion-textarea>
+        <ion-textarea [(ngModel)]="grammarPost.question"></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Choice1</ion-label>
-        <ion-input [(ngModel)]="question.choice1"></ion-input>
+        <ion-input [(ngModel)]="grammarPost.choice1"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Choice2</ion-label>
-        <ion-input [(ngModel)]="question.choice2"></ion-input>
+        <ion-input [(ngModel)]="grammarPost.choice2"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Choice3</ion-label>
-        <ion-input [(ngModel)]="question.choice3"></ion-input>
+        <ion-input [(ngModel)]="grammarPost.choice3"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Choice4</ion-label>
-        <ion-input [(ngModel)]="question.choice4"></ion-input>
+        <ion-input [(ngModel)]="grammarPost.choice4"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Answer</ion-label>
-          <ion-select [(ngModel)]="question.answer">
-            <ion-option selected='false' value=1>{{ question.choice1 }}</ion-option>
-            <ion-option value=2>{{ question.choice2 }}</ion-option>
-            <ion-option value=3>{{ question.choice3 }}</ion-option>
-            <ion-option value=4>{{ question.choice4 }}</ion-option>
+          <ion-select [(ngModel)]="grammarPost.answer">
+            <ion-option selected='false' value=1>{{ grammarPost.choice1 }}</ion-option>
+            <ion-option value=2>{{ grammarPost.choice2 }}</ion-option>
+            <ion-option value=3>{{ grammarPost.choice3 }}</ion-option>
+            <ion-option value=4>{{ grammarPost.choice4 }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -77,29 +77,37 @@
     <ion-list>
       <ion-item>
         <ion-label floating>Word</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="vocabularyPost.word" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Choice1</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="vocabularyPost.choice1"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Choice2</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="vocabularyPost.choice2"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Choice3</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="vocabularyPost.choice3"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Choice4</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="vocabularyPost.choice4"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Answer</ion-label>
-        <ion-input></ion-input>
+          <ion-select [(ngModel)]="vocabularyPost.answer">
+            <ion-option selected='false' value=1>{{ vocabularyPost.choice1 }}</ion-option>
+            <ion-option value=2>{{ vocabularyPost.choice2 }}</ion-option>
+            <ion-option value=3>{{ vocabularyPost.choice3 }}</ion-option>
+            <ion-option value=4>{{ vocabularyPost.choice4 }}</ion-option>
+        </ion-select>
       </ion-item>
     </ion-list>
+    <div progress *ngIf=" errorChk?.progress "><ion-spinner></ion-spinner>{{ errorChk.progress }}</div>
+    <div success *ngIf=" errorChk?.success "><ion-icon name="checkmark"></ion-icon>{{ errorChk.success }}</div>
+    <div error *ngIf=" errorChk?.error "><ion-icon name="bug"></ion-icon>{{ errorChk.error }}</div>
 
   </div>
   

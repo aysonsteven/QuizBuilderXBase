@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http'
 import { HomePage } from '../home/home';
-
+import * as config from '../shared/shared.config.ts';
 
 interface userMeta {
   id:string;
@@ -36,7 +36,7 @@ export class AuthenticationPage {
   authentication: string = 'login';
   errorChk;
   users= [];
-  url:string = 'http://work.org/xbase/'
+  url:string = config.serverURL;
 
   constructor(private navCtrl: NavController, private http: Http) {
     this.test();
@@ -48,7 +48,7 @@ export class AuthenticationPage {
   }
 
   test(){
-    this.http.request( this.url + '/?mc=user.fetch').subscribe(res=>{
+    this.http.request( this.url + '?mc=user.fetch').subscribe(res=>{
       this.users = JSON.parse(res['_body']).data
       console.log(this.users);
     })
