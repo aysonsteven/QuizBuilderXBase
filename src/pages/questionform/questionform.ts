@@ -18,13 +18,17 @@ let grammarData = {
   answer: ''
 }
 
-let vocabulary = {
+let vocabularyData = {
     word: '',
     choice1: '',
     choice2: '',
     choice3: '',
     choice4: '',
     answer: ''
+}
+let picturedescriptionData = {
+  photoURL: '',
+  description:''
 }
 @Component({
   selector: 'page-questionform',
@@ -44,7 +48,7 @@ export class QuestionformPage {
 
   url:string = 'http://xbase.esy.es/';
   grammarPost = grammarData;
-  vocabularyPost = vocabulary;
+  vocabularyPost = vocabularyData;
   category: string = 'grammar';
   constructor(
     private navCtrl: NavController,
