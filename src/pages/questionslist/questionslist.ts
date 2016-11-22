@@ -3,6 +3,7 @@ import { NavController, ToastController } from 'ionic-angular';
 import { QuestionformPage } from '../questionform/questionform'
 import { HomePage } from '../home/home';
 import { Http } from '@angular/http';
+import * as config from '../shared/shared.config.ts';
 
 /*
   Generated class for the Questionslist page.
@@ -17,14 +18,14 @@ import { Http } from '@angular/http';
 
 export class QuestionslistPage {
 
-  
+  pic:string;
 
   more = [];
-
+  
   url:string = 'http://xbase.esy.es/';
   questions = [];
   constructor(private navCtrl: NavController, private http: Http, private tstCtrl: ToastController) {
-
+    console.log('checkConfig:: ' + config.serverURL)
     this.getQuestionList();
   }
 
@@ -33,9 +34,9 @@ export class QuestionslistPage {
   }
 
   getQuestionList(){
-    this.http.get( this.url + '?mc=post.search' ).subscribe(res=>{
+    this.http.request( this.url + '?mc=post.search' ).subscribe(res=>{
       this.questions = JSON.parse(res['_body']).data.rows
-      console.log( JSON.parse(res['_body']).data )
+      console.log( JSON.parse(res['_body']).data.rows )
     }, e=>{})
   }
 

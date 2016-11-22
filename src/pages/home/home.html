@@ -7,95 +7,19 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>dashboard</ion-title>
+    <ion-title>Control Panel</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
-  <!--<h3>Welcome : {{ userName }} 
-    <span *ngIf="waitingList">
-      <ion-spinner></ion-spinner> 
-        Please wait...
-    </span>
-  </h3>-->
   
-  <button ion-button (click)="goToQuestionForm()">Add new question</button>
+  <button ion-button (click)="goToQuestionForm()">Add question</button>
   <button ion-button (click)="goToQuestionList()">QuestionsList</button>
-  <!--<button ion-button small (click)="onClickLogout()">Sign out</button> -->
+
 
   <br>
   <br>
-<!--search bar test START-->
-
-<!--<ion-searchbar [(ngModel)]="searchBar" (ionInput)="searchQuestions($event)"></ion-searchbar>
-  <h4>Questions: </h4>
-  <section *ngIf="searchBar">
-
-    
-    <ion-list>  
-      
-            <ion-item-sliding *ngFor="let id of searchedItem; let i = index" (ionDrag)="onSlideItem(key)">
-          <ion-item >
-          {{ id.value.question }}
-            <button icon-only (click)="more[i] = ! more[i]">
-              <ion-icon name="arrow-down" small *ngIf="!more[i]"></ion-icon>
-              <ion-icon name="arrow-up"  small *ngIf="more[i]"></ion-icon>
-            </button>
-            <div *ngIf="more[i]">
-              <ion-card>
-                <div (click)="onClickChoice(ansTest=1,id.answer)">
-                  Choice1: {{ id.value.choice1 }} 
-                </div>
-                <div (click)="onClickChoice(ansTest=2,id.answer)">
-                  Choice2: {{ id.value.choice2 }}
-                </div>
-                <div (click)="onClickChoice(ansTest=3,id.answer)">
-                  Choice3: {{ id.value.choice3 }}
-                </div>
-                <div (click)="onClickChoice(ansTest=4,id.answer)">
-                  Choice4: {{ id.value.choice4 }}
-                </div>
-                <div>
-                  Answer: {{ id.value.answer }}
-                </div>
-              </ion-card>
-
-
-            </div>
-          </ion-item>
-        <ion-item-options >
-          <button ion-button color="secondary" (click)="onClickUpdate(id.key)"> Edit</button>
-          <button ion-button color="danger" (click)="onClickDelete(id.key)">Delete</button>
-        </ion-item-options>
-      
-      </ion-item-sliding>
-    </ion-list>
-
-  </section>-->
-
-<!--search bar test END-->
-
-
-
-    <!--<ion-refresher (ionRefresh)="onRefresh($event)">
-      <ion-refresher-content>
-        
-      </ion-refresher-content>
-    </ion-refresher>-->
-
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-
-  <div *ngIf=" noMorePost ">
-      <h5 padding> You've loaded all the questions already. </h5>
-  </div>
-  <!--<div>{{ page }}</div>
-<button ion-button  (click)="onClickPrevious()" >Previous</button>
-<button ion-button disabled *ngIf="noMorePost">Next</button>
-<button ion-button (click)="onClickNext()" *ngIf="!noMorePost">Next</button>-->
 
 </ion-content>

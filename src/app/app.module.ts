@@ -5,6 +5,7 @@ import { HomePage } from '../pages/home/home';
 import { QuestionformPage } from '../pages/questionform/questionform';
 import { AuthenticationPage } from '../pages/authentication/authentication';
 import { QuestionslistPage } from '../pages/questionslist/questionslist';
+import { FireModule } from '../fireframe2/fire-module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { QuestionslistPage } from '../pages/questionslist/questionslist';
     QuestionslistPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    FireModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
