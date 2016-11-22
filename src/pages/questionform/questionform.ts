@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+<<<<<<< HEAD
 import { Http } from '@angular/http';
 import { Data } from '../../fireframe2/data';
+=======
+import { Http } from '@angular/http'
+>>>>>>> 552a2c68cdb53416857d81ceabd5f31372f32db8
 /*
   Generated class for the Questionform page.
 
@@ -17,6 +21,7 @@ let grammarData = {
   choice3: '',
   choice4: '',
   answer: ''
+<<<<<<< HEAD
 }
 
 let vocabularyData = {
@@ -33,6 +38,22 @@ export let  picturedescriptionData = {
   photoREF:''
 }
 
+=======
+}
+
+let vocabularyData = {
+    word: '',
+    choice1: '',
+    choice2: '',
+    choice3: '',
+    choice4: '',
+    answer: ''
+}
+let picturedescriptionData = {
+  photoURL: '',
+  description:''
+}
+>>>>>>> 552a2c68cdb53416857d81ceabd5f31372f32db8
 @Component({
   selector: 'page-questionform',
   templateUrl: 'questionform.html'
@@ -55,8 +76,11 @@ export class QuestionformPage {
   url:string = 'http://xbase.esy.es/';
   grammarPost = grammarData;
   vocabularyPost = vocabularyData;
+<<<<<<< HEAD
   photo = picturedescriptionData;
   
+=======
+>>>>>>> 552a2c68cdb53416857d81ceabd5f31372f32db8
   category: string = 'grammar';
   constructor(
     private navCtrl: NavController,
@@ -81,8 +105,11 @@ export class QuestionformPage {
 
   }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 552a2c68cdb53416857d81ceabd5f31372f32db8
   removeWhiteSpaces( val ){
     console.log('test:: ' , val)
     return val.split(' ').join('')
@@ -192,6 +219,7 @@ export class QuestionformPage {
       console.log( 'error' + e )
     })
   }
+<<<<<<< HEAD
 
     onFileUploaded( url, ref ) {
       this.file_progress = false;
@@ -227,6 +255,9 @@ export class QuestionformPage {
   }
 
 
+=======
+  
+>>>>>>> 552a2c68cdb53416857d81ceabd5f31372f32db8
 
   grammarQuestion(){
     if ( this.validateForm() == false ) {
@@ -262,6 +293,7 @@ export class QuestionformPage {
   }
 
   photoQuestion(){
+<<<<<<< HEAD
     this.checkIDX();
     this.errorChk = { progress: 'processing' };
     this.http.request(
@@ -282,15 +314,25 @@ export class QuestionformPage {
     }, e=>{
       console.error( 'error', e )
     })
+=======
+    // console.log('pic ' + this.grammarPost )
+>>>>>>> 552a2c68cdb53416857d81ceabd5f31372f32db8
   }
 
   onClickCreateQuestion(){
     if( this.category == 'grammar'){
       this.grammarQuestion();
+<<<<<<< HEAD
       return;
     }else if( this.category == 'vocabulary' ){
       this.vocabularyQuestion();
       return;
+=======
+    }else if( this.category == 'vocabulary' ){
+      this.vocabularyQuestion();
+    }else{
+      this.photoQuestion();
+>>>>>>> 552a2c68cdb53416857d81ceabd5f31372f32db8
     }
       this.photoQuestion();
     
